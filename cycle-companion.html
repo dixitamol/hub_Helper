@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    if ('serviceWorker' in navigator){
-      navigator.serviceWorker.register('sw.js');
-    }
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <meta name="theme-color" content="#f5ede0" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Cycle Companion" />
   <title>Cycle Companion</title>
+
+  <!-- Inline SVG icon as base64 — no external files needed -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI0IiBmaWxsPSIjZjVlZGUwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJjMjQxNiIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGxpbmUgeDE9IjUwIiB5MT0iMjQiIHgyPSI1MCIgeTI9IjE2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjUwIiB5MT0iNjgiIHgyPSI1MCIgeTI9Ijc2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjI4IiB5MT0iNDYiIHgyPSIyMCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjcyIiB5MT0iNDYiIHgyPSI4MCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iNyIgZmlsbD0iI2MwNTE0YSIvPjx0ZXh0IHg9IjUwIiB5PSI5MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNmI1YjQ1Ij5jeWNsZTwvdGV4dD48L3N2Zz4=" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI0IiBmaWxsPSIjZjVlZGUwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJjMjQxNiIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGxpbmUgeDE9IjUwIiB5MT0iMjQiIHgyPSI1MCIgeTI9IjE2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjUwIiB5MT0iNjgiIHgyPSI1MCIgeTI9Ijc2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjI4IiB5MT0iNDYiIHgyPSIyMCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjcyIiB5MT0iNDYiIHgyPSI4MCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iNyIgZmlsbD0iI2MwNTE0YSIvPjx0ZXh0IHg9IjUwIiB5PSI5MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNmI1YjQ1Ij5jeWNsZTwvdGV4dD48L3N2Zz4=" />
+
+  <!-- Inline PWA manifest -->
+  <script>
+    const manifestData = {
+      name: "Cycle Companion",
+      short_name: "Cycle",
+      start_url: "./",
+      display: "standalone",
+      background_color: "#f5ede0",
+      theme_color: "#f5ede0",
+      icons: [{
+        src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI0IiBmaWxsPSIjZjVlZGUwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJjMjQxNiIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGxpbmUgeDE9IjUwIiB5MT0iMjQiIHgyPSI1MCIgeTI9IjE2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjUwIiB5MT0iNjgiIHgyPSI1MCIgeTI9Ijc2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjI4IiB5MT0iNDYiIHgyPSIyMCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjcyIiB5MT0iNDYiIHgyPSI4MCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iNyIgZmlsbD0iI2MwNTE0YSIvPjx0ZXh0IHg9IjUwIiB5PSI5MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNmI1YjQ1Ij5jeWNsZTwvdGV4dD48L3N2Zz4=",
+        sizes: "192x192",
+        type: "image/svg+xml"
+      }]
+    };
+    const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
+    const manifestUrl = URL.createObjectURL(manifestBlob);
+    document.addEventListener('DOMContentLoaded', () => {
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = manifestUrl;
+      document.head.appendChild(link);
+    });
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
@@ -502,6 +528,60 @@
     .fade-in-delay-2 { animation-delay: 0.2s; opacity: 0; }
     .fade-in-delay-3 { animation-delay: 0.3s; opacity: 0; }
     .fade-in-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+    /* ── LATE CYCLE BANNER ── */
+    .late-banner {
+      margin: 12px 16px 0;
+      background: #fff8e8;
+      border: 1.5px solid #e8c96a;
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .late-banner-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.4; }
+    .late-banner-text { font-size: 0.85rem; line-height: 1.6; color: #7a6020; }
+    .late-banner-text strong { display: block; font-weight: 500; color: #5a4010; margin-bottom: 2px; }
+
+    /* ── LOOK AHEAD ── */
+    .look-ahead-section { margin: 16px 16px 0; }
+
+    .look-ahead-trigger {
+      width: 100%;
+      background: white;
+      border: 1.5px dashed #d8ccc0;
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .look-ahead-trigger:hover { border-color: var(--text-light); background: var(--warm-white); }
+    .look-ahead-trigger span { font-size: 0.875rem; color: var(--text-mid); }
+    .look-ahead-trigger .la-icon { font-size: 1.1rem; }
+
+    .look-ahead-panel {
+      display: none;
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 20px 18px;
+      box-shadow: 0 2px 16px rgba(44,36,22,0.07);
+      margin-top: 10px;
+    }
+    .look-ahead-panel.open { display: block; }
+    .look-ahead-panel .field { margin-bottom: 16px; }
+
+    .look-ahead-result { margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0e8dc; display: none; }
+    .look-ahead-result.visible { display: block; }
+
+    .la-result-phase { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--text-dark); margin-bottom: 4px; }
+    .la-result-date { font-size: 0.8rem; color: var(--text-light); margin-bottom: 12px; }
+    .la-result-desc { font-size: 0.85rem; line-height: 1.7; color: var(--text-mid); }
+    .la-result-tip { margin-top: 12px; padding: 12px 14px; background: var(--phase-bg); border-radius: 8px; font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; transition: background 0.3s; }
   </style>
 </head>
 <body>
@@ -588,10 +668,41 @@
       </div>
     </div>
 
+    <!-- Late cycle banner (shown conditionally) -->
+    <div id="late-banner" class="late-banner" style="display:none;">
+      <span class="late-banner-icon">⚠️</span>
+      <div class="late-banner-text">
+        <strong>Cycle may be late</strong>
+        <span id="late-banner-msg">Her cycle is running longer than expected. This can be normal — stress, illness, and other factors affect timing. If it continues, it may be worth checking in with her gently.</span>
+      </div>
+    </div>
+
     <!-- Tips -->
     <div class="tips-section fade-in fade-in-delay-3">
       <div class="section-label">How to show up today</div>
       <div id="tips-container"></div>
+    </div>
+
+    <!-- Look Ahead -->
+    <div class="look-ahead-section fade-in fade-in-delay-4">
+      <div class="section-label">Plan ahead</div>
+      <button class="look-ahead-trigger" onclick="toggleLookAhead()">
+        <span class="la-icon">🗓️</span>
+        <span>What phase will she be in on a future date?</span>
+      </button>
+      <div class="look-ahead-panel" id="look-ahead-panel">
+        <div class="field">
+          <label>Pick a date</label>
+          <input type="date" id="look-ahead-date" oninput="computeLookAhead()" />
+          <p class="hint">See the phase, what to expect, and how to plan.</p>
+        </div>
+        <div class="look-ahead-result" id="look-ahead-result">
+          <div class="la-result-phase" id="la-phase-name">—</div>
+          <div class="la-result-date" id="la-phase-day">—</div>
+          <div class="la-result-desc" id="la-phase-desc">—</div>
+          <div class="la-result-tip" id="la-phase-tip">—</div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -779,6 +890,7 @@
     const phase = PHASES[state.phase];
 
     applyPhaseTheme(state.phase);
+    checkLateBanner(data);
 
     // Date
     document.getElementById('display-date').textContent = formatDateFull(new Date());
@@ -866,6 +978,87 @@
     saveData(data);
     closeSettings();
     renderApp();
+  }
+
+  // ══ LATE BANNER ══
+  const LATE_THRESHOLD_DAYS = 40;
+
+  function checkLateBanner(data) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const lastPeriod = new Date(data.lastPeriodStart);
+    lastPeriod.setHours(0, 0, 0, 0);
+    const daysSince = daysBetween(lastPeriod, today);
+    const banner = document.getElementById('late-banner');
+    if (daysSince > LATE_THRESHOLD_DAYS) {
+      const daysOver = daysSince - data.cycleLength;
+      document.getElementById('late-banner-msg').textContent =
+        `Her cycle is ${daysOver} day${daysOver !== 1 ? 's' : ''} longer than her usual ${data.cycleLength}-day cycle. This can be normal — stress, illness, travel, or hormonal shifts can all delay a period. If she hasn't mentioned it, a gentle check-in might be welcome.`;
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  // ══ LOOK AHEAD ══
+  function toggleLookAhead() {
+    const panel = document.getElementById('look-ahead-panel');
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      // Default to tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      document.getElementById('look-ahead-date').value = tomorrow.toISOString().split('T')[0];
+      computeLookAhead();
+    }
+  }
+
+  function computeLookAhead() {
+    const data = loadData();
+    const dateVal = document.getElementById('look-ahead-date').value;
+    if (!dateVal || !data) return;
+
+    const targetDate = new Date(dateVal);
+    targetDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (targetDate <= today) {
+      document.getElementById('la-phase-name').textContent = 'Pick a future date';
+      document.getElementById('la-phase-day').textContent = '';
+      document.getElementById('la-phase-desc').textContent = '';
+      document.getElementById('la-phase-tip').textContent = '';
+      document.getElementById('look-ahead-result').classList.add('visible');
+      return;
+    }
+
+    // Compute cycle state for target date (same logic, different reference point)
+    const lastPeriod = new Date(data.lastPeriodStart);
+    lastPeriod.setHours(0, 0, 0, 0);
+    const cycleLen = data.cycleLength;
+    const periodDur = data.periodDuration;
+    const ovulationDay = cycleLen - 14;
+
+    const daysSinceLast = daysBetween(lastPeriod, targetDate);
+    const cyclesElapsed = Math.floor(daysSinceLast / cycleLen);
+    const currentCycleStart = addDays(lastPeriod, cyclesElapsed * cycleLen);
+    const cycleDay = daysBetween(currentCycleStart, targetDate) + 1;
+
+    let phaseKey;
+    if (cycleDay <= periodDur) phaseKey = 'menstrual';
+    else if (cycleDay < ovulationDay - 1) phaseKey = 'follicular';
+    else if (cycleDay <= ovulationDay + 1) phaseKey = 'ovulation';
+    else phaseKey = 'luteal';
+
+    const phase = PHASES[phaseKey];
+    const tip = phase.tips[0]; // Show the first tip as a preview
+
+    document.getElementById('la-phase-name').textContent = phase.name;
+    document.getElementById('la-phase-day').textContent =
+      `Day ${cycleDay} of cycle · ${formatDateFull(targetDate)}`;
+    document.getElementById('la-phase-desc').textContent = phase.description;
+    document.getElementById('la-phase-tip').textContent = `💡 ${tip.title}: ${tip.text}`;
+    document.getElementById('look-ahead-result').classList.add('visible');
   }
 
   // ══ NAVIGATION ══
