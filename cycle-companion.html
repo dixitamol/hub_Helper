@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#f5ede0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Cycle Companion" />
+  <title>Cycle Companion</title>
+
+  <!-- Inline SVG icon as base64 — no external files needed -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI0IiBmaWxsPSIjZjVlZGUwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJjMjQxNiIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGxpbmUgeDE9IjUwIiB5MT0iMjQiIHgyPSI1MCIgeTI9IjE2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjUwIiB5MT0iNjgiIHgyPSI1MCIgeTI9Ijc2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjI4IiB5MT0iNDYiIHgyPSIyMCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjcyIiB5MT0iNDYiIHgyPSI4MCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iNyIgZmlsbD0iI2MwNTE0YSIvPjx0ZXh0IHg9IjUwIiB5PSI5MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNmI1YjQ1Ij5jeWNsZTwvdGV4dD48L3N2Zz4=" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI0IiBmaWxsPSIjZjVlZGUwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJjMjQxNiIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGxpbmUgeDE9IjUwIiB5MT0iMjQiIHgyPSI1MCIgeTI9IjE2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjUwIiB5MT0iNjgiIHgyPSI1MCIgeTI9Ijc2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjI4IiB5MT0iNDYiIHgyPSIyMCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjcyIiB5MT0iNDYiIHgyPSI4MCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iNyIgZmlsbD0iI2MwNTE0YSIvPjx0ZXh0IHg9IjUwIiB5PSI5MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNmI1YjQ1Ij5jeWNsZTwvdGV4dD48L3N2Zz4=" />
+
+  <!-- Inline PWA manifest -->
+  <script>
+    const manifestData = {
+      name: "Cycle Companion",
+      short_name: "Cycle",
+      start_url: "./",
+      display: "standalone",
+      background_color: "#f5ede0",
+      theme_color: "#f5ede0",
+      icons: [{
+        src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI0IiBmaWxsPSIjZjVlZGUwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJjMjQxNiIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGxpbmUgeDE9IjUwIiB5MT0iMjQiIHgyPSI1MCIgeTI9IjE2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjUwIiB5MT0iNjgiIHgyPSI1MCIgeTI9Ijc2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjI4IiB5MT0iNDYiIHgyPSIyMCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjcyIiB5MT0iNDYiIHgyPSI4MCIgeTI9IjQ2IiBzdHJva2U9IiMyYzI0MTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI0NiIgcj0iNyIgZmlsbD0iI2MwNTE0YSIvPjx0ZXh0IHg9IjUwIiB5PSI5MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNmI1YjQ1Ij5jeWNsZTwvdGV4dD48L3N2Zz4=",
+        sizes: "192x192",
+        type: "image/svg+xml"
+      }]
+    };
+    const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
+    const manifestUrl = URL.createObjectURL(manifestBlob);
+    document.addEventListener('DOMContentLoaded', () => {
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = manifestUrl;
+      document.head.appendChild(link);
+    });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cream: #f5ede0;
+      --warm-white: #fdf8f2;
+      --text-dark: #2c2416;
+      --text-mid: #6b5b45;
+      --text-light: #a8927a;
+
+      /* Phase colours */
+      --menstrual-bg: #f9e8e8;
+      --menstrual-accent: #c0514a;
+      --menstrual-soft: #e8a09a;
+
+      --follicular-bg: #e8f0f9;
+      --follicular-accent: #4a7ab5;
+      --follicular-soft: #8fb3d9;
+
+      --ovulation-bg: #edf7e8;
+      --ovulation-accent: #4a9455;
+      --ovulation-soft: #8fc49a;
+
+      --luteal-bg: #f5eef8;
+      --luteal-accent: #7a4a9e;
+      --luteal-soft: #b48fc4;
+
+      --phase-bg: var(--cream);
+      --phase-accent: var(--text-dark);
+      --phase-soft: var(--text-light);
+
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--phase-bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      transition: background 0.8s ease;
+      overflow-x: hidden;
+    }
+
+    /* ── SETUP SCREEN ── */
+    #setup-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px 24px;
+      background: var(--warm-white);
+    }
+
+    #setup-screen h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    #setup-screen p.subtitle {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 40px;
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    .setup-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 4px 32px rgba(44,36,22,0.08);
+    }
+
+    .field {
+      margin-bottom: 24px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+    }
+
+    .field input[type="date"],
+    .field input[type="number"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #e8ddd0;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: var(--warm-white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .field input:focus {
+      border-color: var(--text-mid);
+    }
+
+    .field .hint {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 16px;
+      background: var(--text-dark);
+      color: var(--warm-white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:active { transform: scale(0.98); opacity: 0.85; }
+
+    /* ── MAIN APP ── */
+    #app-screen { display: none; min-height: 100vh; }
+
+    .app-wrapper {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 0 0 40px;
+    }
+
+    /* Header */
+    .header {
+      padding: 52px 24px 24px;
+      position: relative;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .app-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-mid);
+      letter-spacing: 0.04em;
+    }
+
+    .settings-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-light);
+      font-size: 1.3rem;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    /* Date display */
+    .today-date {
+      margin-top: 20px;
+    }
+
+    .today-date .day-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .today-date .full-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      margin-top: 2px;
+    }
+
+    /* Phase Hero Card */
+    .phase-hero {
+      margin: 8px 16px 0;
+      border-radius: 24px;
+      padding: 28px 24px;
+      background: white;
+      box-shadow: 0 2px 24px rgba(44,36,22,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.8s ease;
+    }
+
+    .phase-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--phase-soft);
+      opacity: 0.15;
+      transition: background 0.8s ease;
+    }
+
+    .phase-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--phase-bg);
+      border-radius: 100px;
+      padding: 5px 12px 5px 8px;
+      margin-bottom: 14px;
+      transition: background 0.8s ease;
+    }
+
+    .phase-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--phase-accent);
+      transition: background 0.8s ease;
+    }
+
+    .phase-pill span {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--phase-accent);
+      transition: color 0.8s ease;
+    }
+
+    .phase-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .phase-day {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .phase-description {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-mid);
+      border-top: 1px solid #f0e8dc;
+      padding-top: 16px;
+    }
+
+    /* Cycle progress bar */
+    .cycle-progress {
+      margin: 16px 16px 0;
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px 20px 16px;
+      box-shadow: 0 2px 24px rgba(44,36,22,0.05);
+    }
+
+    .progress-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #f0e8dc;
+      border-radius: 100px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--phase-accent);
+      transition: width 0.6s ease, background 0.8s ease;
+      position: relative;
+    }
+
+    .progress-thumb {
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--phase-accent);
+      border: 2px solid white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      transition: background 0.8s ease;
+    }
+
+    .progress-phases {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .progress-phase-label {
+      font-size: 0.65rem;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+    }
+
+    /* Upcoming */
+    .upcoming-row {
+      display: flex;
+      gap: 10px;
+      margin: 14px 16px 0;
+    }
+
+    .upcoming-card {
+      flex: 1;
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 16px 14px;
+      box-shadow: 0 2px 16px rgba(44,36,22,0.05);
+    }
+
+    .upcoming-card .uc-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .upcoming-card .uc-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+
+    .upcoming-card .uc-sub {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* Tips Section */
+    .tips-section {
+      margin: 16px 16px 0;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      padding: 0 4px;
+    }
+
+    .tip-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 16px rgba(44,36,22,0.05);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .tip-icon {
+      font-size: 1.2rem;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+
+    .tip-text {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--text-mid);
+    }
+
+    .tip-text strong {
+      display: block;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+      font-size: 0.85rem;
+    }
+
+    /* Settings Panel */
+    #settings-panel {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(44,36,22,0.4);
+      z-index: 100;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    #settings-panel.open { display: flex; }
+
+    .settings-sheet {
+      background: var(--warm-white);
+      border-radius: 24px 24px 0 0;
+      padding: 28px 24px 48px;
+      width: 100%;
+      max-width: 420px;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .settings-sheet h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 24px;
+      color: var(--text-dark);
+    }
+
+    .settings-sheet .field { margin-bottom: 20px; }
+
+    .settings-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 14px;
+      background: transparent;
+      border: 1.5px solid #e0d4c4;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      cursor: pointer;
+    }
+
+    .btn-primary.small { padding: 14px; font-size: 0.9rem; flex: 1; }
+
+    /* Fade in animation */
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-in-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-in-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .fade-in-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+    /* ── LATE CYCLE BANNER ── */
+    .late-banner {
+      margin: 12px 16px 0;
+      background: #fff8e8;
+      border: 1.5px solid #e8c96a;
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .late-banner-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.4; }
+    .late-banner-text { font-size: 0.85rem; line-height: 1.6; color: #7a6020; }
+    .late-banner-text strong { display: block; font-weight: 500; color: #5a4010; margin-bottom: 2px; }
+
+    /* ── LOOK AHEAD ── */
+    .look-ahead-section { margin: 16px 16px 0; }
+
+    .look-ahead-trigger {
+      width: 100%;
+      background: white;
+      border: 1.5px dashed #d8ccc0;
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .look-ahead-trigger:hover { border-color: var(--text-light); background: var(--warm-white); }
+    .look-ahead-trigger span { font-size: 0.875rem; color: var(--text-mid); }
+    .look-ahead-trigger .la-icon { font-size: 1.1rem; }
+
+    .look-ahead-panel {
+      display: none;
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 20px 18px;
+      box-shadow: 0 2px 16px rgba(44,36,22,0.07);
+      margin-top: 10px;
+    }
+    .look-ahead-panel.open { display: block; }
+    .look-ahead-panel .field { margin-bottom: 16px; }
+
+    .look-ahead-result { margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0e8dc; display: none; }
+    .look-ahead-result.visible { display: block; }
+
+    .la-result-phase { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--text-dark); margin-bottom: 4px; }
+    .la-result-date { font-size: 0.8rem; color: var(--text-light); margin-bottom: 12px; }
+    .la-result-desc { font-size: 0.85rem; line-height: 1.7; color: var(--text-mid); }
+    .la-result-tip { margin-top: 12px; padding: 12px 14px; background: var(--phase-bg); border-radius: 8px; font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; transition: background 0.3s; }
+  </style>
+</head>
+<body>
+
+<!-- ══ SETUP SCREEN ══ -->
+<div id="setup-screen">
+  <h1>Cycle<br/>Companion</h1>
+  <p class="subtitle">A quiet tool to help you show up for her, every day.</p>
+
+  <div class="setup-card">
+    <div class="field">
+      <label>First day of her last period</label>
+      <input type="date" id="setup-last-period" />
+      <p class="hint">The day her most recent period started</p>
+    </div>
+    <div class="field">
+      <label>Average cycle length (days)</label>
+      <input type="number" id="setup-cycle-length" value="28" min="21" max="40" />
+      <p class="hint">Typically 21–35 days. Default 28 is fine to start.</p>
+    </div>
+    <div class="field">
+      <label>Period duration (days)</label>
+      <input type="number" id="setup-period-duration" value="5" min="2" max="10" />
+      <p class="hint">How many days her period usually lasts</p>
+    </div>
+    <button class="btn-primary" onclick="saveSetup()">Get started →</button>
+  </div>
+</div>
+
+<!-- ══ MAIN APP SCREEN ══ -->
+<div id="app-screen">
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <div class="header fade-in">
+      <div class="header-top">
+        <span class="app-title">Cycle Companion</span>
+        <button class="settings-btn" onclick="openSettings()" aria-label="Settings">⚙</button>
+      </div>
+      <div class="today-date">
+        <div class="day-label">Today</div>
+        <div class="full-date" id="display-date">—</div>
+      </div>
+    </div>
+
+    <!-- Phase Hero -->
+    <div class="phase-hero fade-in fade-in-delay-1" id="phase-hero">
+      <div class="phase-pill">
+        <div class="phase-dot"></div>
+        <span id="phase-label">Phase</span>
+      </div>
+      <div class="phase-name" id="phase-name">Loading…</div>
+      <div class="phase-day" id="phase-day">Day — of cycle</div>
+      <div class="phase-description" id="phase-description"></div>
+    </div>
+
+    <!-- Cycle Progress -->
+    <div class="cycle-progress fade-in fade-in-delay-2">
+      <div class="progress-label">Cycle progress</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill">
+          <div class="progress-thumb"></div>
+        </div>
+      </div>
+      <div class="progress-phases">
+        <span class="progress-phase-label">Period</span>
+        <span class="progress-phase-label">Follicular</span>
+        <span class="progress-phase-label">Ovulation</span>
+        <span class="progress-phase-label">Luteal</span>
+      </div>
+    </div>
+
+    <!-- Upcoming cards -->
+    <div class="upcoming-row fade-in fade-in-delay-2">
+      <div class="upcoming-card">
+        <div class="uc-label">Next period</div>
+        <div class="uc-value" id="next-period-days">—</div>
+        <div class="uc-sub" id="next-period-date">—</div>
+      </div>
+      <div class="upcoming-card">
+        <div class="uc-label">Ovulation</div>
+        <div class="uc-value" id="ovulation-days">—</div>
+        <div class="uc-sub" id="ovulation-date">—</div>
+      </div>
+    </div>
+
+    <!-- Late cycle banner (shown conditionally) -->
+    <div id="late-banner" class="late-banner" style="display:none;">
+      <span class="late-banner-icon">⚠️</span>
+      <div class="late-banner-text">
+        <strong>Cycle may be late</strong>
+        <span id="late-banner-msg">Her cycle is running longer than expected. This can be normal — stress, illness, and other factors affect timing. If it continues, it may be worth checking in with her gently.</span>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips-section fade-in fade-in-delay-3">
+      <div class="section-label">How to show up today</div>
+      <div id="tips-container"></div>
+    </div>
+
+    <!-- Look Ahead -->
+    <div class="look-ahead-section fade-in fade-in-delay-4">
+      <div class="section-label">Plan ahead</div>
+      <button class="look-ahead-trigger" onclick="toggleLookAhead()">
+        <span class="la-icon">🗓️</span>
+        <span>What phase will she be in on a future date?</span>
+      </button>
+      <div class="look-ahead-panel" id="look-ahead-panel">
+        <div class="field">
+          <label>Pick a date</label>
+          <input type="date" id="look-ahead-date" oninput="computeLookAhead()" />
+          <p class="hint">See the phase, what to expect, and how to plan.</p>
+        </div>
+        <div class="look-ahead-result" id="look-ahead-result">
+          <div class="la-result-phase" id="la-phase-name">—</div>
+          <div class="la-result-date" id="la-phase-day">—</div>
+          <div class="la-result-desc" id="la-phase-desc">—</div>
+          <div class="la-result-tip" id="la-phase-tip">—</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SETTINGS PANEL ══ -->
+<div id="settings-panel" onclick="closeSettingsOutside(event)">
+  <div class="settings-sheet">
+    <h2>Settings</h2>
+    <div class="field">
+      <label>First day of last period</label>
+      <input type="date" id="edit-last-period" />
+    </div>
+    <div class="field">
+      <label>Cycle length (days)</label>
+      <input type="number" id="edit-cycle-length" min="21" max="40" />
+    </div>
+    <div class="field">
+      <label>Period duration (days)</label>
+      <input type="number" id="edit-period-duration" min="2" max="10" />
+    </div>
+    <div class="settings-actions">
+      <button class="btn-secondary" onclick="closeSettings()">Cancel</button>
+      <button class="btn-primary small" onclick="saveSettings()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ══ DATA ══
+  const STORAGE_KEY = 'cycle_companion_v1';
+
+  const PHASES = {
+    menstrual: {
+      name: 'Menstrual',
+      label: 'Period',
+      description: "Her body is doing a lot right now. Energy is typically lower, and she may have cramps, bloating, back ache, or just feel tender and tired. Emotionally, she may feel more inward and sensitive.",
+      cssVars: {
+        '--phase-bg': '#f9e8e8',
+        '--phase-accent': '#c0514a',
+        '--phase-soft': '#e8a09a',
+      },
+      tips: [
+        { icon: '🌡️', title: 'Warmth goes a long way', text: 'A hot water bottle, a warm blanket, or heating pad for cramps can be a simple but meaningful gesture.' },
+        { icon: '🛋️', title: 'Take things off her plate', text: 'Cooking dinner, handling chores without being asked — she\'ll notice and appreciate it more than you know.' },
+        { icon: '🤍', title: 'Be patient, not fix-it', text: 'If she\'s moody or quiet, don\'t try to solve it. Just be present. Ask "what do you need?" rather than offering solutions.' },
+        { icon: '🍫', title: 'Snacks matter', text: 'Chocolate, comfort food, her favourite treat — keep them stocked. Cravings are real and hormonal.' },
+      ]
+    },
+    follicular: {
+      name: 'Follicular',
+      label: 'Rising Energy',
+      description: "Energy is picking back up after her period. She's likely feeling more optimistic, social, and motivated. Her mood lifts progressively through this phase — expect her to be more talkative and engaged.",
+      cssVars: {
+        '--phase-bg': '#e8f0f9',
+        '--phase-accent': '#4a7ab5',
+        '--phase-soft': '#8fb3d9',
+      },
+      tips: [
+        { icon: '📅', title: 'Great time to make plans', text: 'She has energy and optimism right now. Suggest a date, a trip, or something you\'ve been wanting to do together.' },
+        { icon: '💬', title: 'Have the bigger conversations', text: 'If there\'s something you\'ve been meaning to discuss — plans, decisions, any tension — this is a good window. She\'s mentally sharp and resilient.' },
+        { icon: '🌿', title: 'Match her energy', text: 'She may want to go out more, try new things, or be active. Be up for it — this is her high-energy window building.' },
+      ]
+    },
+    ovulation: {
+      name: 'Ovulation',
+      label: 'Peak',
+      description: "She\'s at her peak right now. Highest energy, best mood, most confident and communicative. Many people feel their most attractive and social during ovulation. Enjoy this window — it only lasts a few days.",
+      cssVars: {
+        '--phase-bg': '#edf7e8',
+        '--phase-accent': '#4a9455',
+        '--phase-soft': '#8fc49a',
+      },
+      tips: [
+        { icon: '✨', title: 'She\'s glowing — tell her', text: 'Compliment her genuinely. She\'s likely feeling confident but still loves to hear it from you.' },
+        { icon: '🍽️', title: 'Plan something special', text: 'A nice dinner out, a spontaneous outing — she has the energy and mood for it. Don\'t let this window pass quietly.' },
+        { icon: '💑', title: 'Quality time counts', text: 'Libido is often highest around ovulation. Be attentive, present, and intentional.' },
+      ]
+    },
+    luteal: {
+      name: 'Luteal',
+      label: 'Winding Down',
+      description: "Energy gradually drops through this phase. The second half (roughly the last 7–10 days before her period) is often when PMS symptoms appear — irritability, fatigue, sensitivity, bloating, food cravings, and feeling easily overwhelmed. This is the phase that needs the most patience from you.",
+      cssVars: {
+        '--phase-bg': '#f5eef8',
+        '--phase-accent': '#7a4a9e',
+        '--phase-soft': '#b48fc4',
+      },
+      tips: [
+        { icon: '🧘', title: 'Patience is your superpower', text: 'She may be snappier or more emotional than usual. It\'s not you (probably). Don\'t take it personally — just be steady and calm.' },
+        { icon: '🏠', title: 'Create comfort at home', text: 'She may prefer staying in over going out. Cosy nights, her favourite show, low-key plans. Don\'t push for social activities.' },
+        { icon: '🙏', title: 'Don\'t start big arguments', text: 'If something can wait — let it wait. Emotional reactivity is higher now. Save difficult conversations for after her period if possible.' },
+        { icon: '🛒', title: 'Anticipate, don\'t wait to be asked', text: 'Check if she needs anything — snacks, supplies, a quiet evening. Noticing before she has to ask is everything.' },
+      ]
+    }
+  };
+
+  // ══ HELPERS ══
+  function loadData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null; }
+    catch { return null; }
+  }
+
+  function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function daysBetween(date1, date2) {
+    return Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+  }
+
+  function addDays(date, days) {
+    const d = new Date(date);
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+
+  function formatDate(date) {
+    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+  }
+
+  function formatDateFull(date) {
+    return date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+  }
+
+  // ══ CYCLE LOGIC ══
+  function computeCycleState(data) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const lastPeriod = new Date(data.lastPeriodStart);
+    lastPeriod.setHours(0, 0, 0, 0);
+
+    const cycleLen = data.cycleLength;
+    const periodDur = data.periodDuration;
+
+    // How many days into the current cycle?
+    let daysSinceLast = daysBetween(lastPeriod, today);
+
+    // Roll forward if we've passed a full cycle (or more)
+    const cyclesElapsed = Math.floor(daysSinceLast / cycleLen);
+    const currentCycleStart = addDays(lastPeriod, cyclesElapsed * cycleLen);
+    const cycleDay = daysBetween(currentCycleStart, today) + 1; // 1-indexed
+
+    // Phase boundaries
+    // Menstrual: days 1 – periodDur
+    // Follicular: periodDur+1 – ovulationDay-2
+    // Ovulation: ovulationDay-1 – ovulationDay+1  (3 day window)
+    // Luteal: rest
+    const ovulationDay = cycleLen - 14; // approx
+
+    let phase;
+    if (cycleDay <= periodDur) {
+      phase = 'menstrual';
+    } else if (cycleDay < ovulationDay - 1) {
+      phase = 'follicular';
+    } else if (cycleDay <= ovulationDay + 1) {
+      phase = 'ovulation';
+    } else {
+      phase = 'luteal';
+    }
+
+    // Next period
+    const nextPeriodDate = addDays(currentCycleStart, cycleLen);
+    const daysToNextPeriod = daysBetween(today, nextPeriodDate);
+
+    // Ovulation date
+    const ovulationDate = addDays(currentCycleStart, ovulationDay - 1);
+    const daysToOvulation = daysBetween(today, ovulationDate);
+
+    return { phase, cycleDay, cycleLen, nextPeriodDate, daysToNextPeriod, ovulationDate, daysToOvulation };
+  }
+
+  // ══ UI ══
+  function applyPhaseTheme(phaseKey) {
+    const vars = PHASES[phaseKey].cssVars;
+    Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+  }
+
+  function renderApp() {
+    const data = loadData();
+    if (!data) return;
+
+    const state = computeCycleState(data);
+    const phase = PHASES[state.phase];
+
+    applyPhaseTheme(state.phase);
+    checkLateBanner(data);
+
+    // Date
+    document.getElementById('display-date').textContent = formatDateFull(new Date());
+
+    // Phase hero
+    document.getElementById('phase-label').textContent = phase.label;
+    document.getElementById('phase-name').textContent = phase.name;
+    document.getElementById('phase-day').textContent = `Day ${state.cycleDay} of ${state.cycleLen}-day cycle`;
+    document.getElementById('phase-description').textContent = phase.description;
+
+    // Progress bar
+    const pct = Math.min(100, Math.round((state.cycleDay / state.cycleLen) * 100));
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    // Upcoming
+    const npDays = state.daysToNextPeriod;
+    document.getElementById('next-period-days').textContent =
+      npDays === 0 ? 'Today' : npDays === 1 ? 'Tomorrow' : `${npDays} days`;
+    document.getElementById('next-period-date').textContent = formatDate(state.nextPeriodDate);
+
+    const ovDays = state.daysToOvulation;
+    if (state.phase === 'ovulation') {
+      document.getElementById('ovulation-days').textContent = 'Now';
+      document.getElementById('ovulation-date').textContent = 'Peak window';
+    } else if (ovDays < 0) {
+      document.getElementById('ovulation-days').textContent = 'Passed';
+      document.getElementById('ovulation-date').textContent = 'Next cycle';
+    } else {
+      document.getElementById('ovulation-days').textContent =
+        ovDays === 0 ? 'Today' : ovDays === 1 ? 'Tomorrow' : `${ovDays} days`;
+      document.getElementById('ovulation-date').textContent = formatDate(state.ovulationDate);
+    }
+
+    // Tips
+    const tipsContainer = document.getElementById('tips-container');
+    tipsContainer.innerHTML = '';
+    phase.tips.forEach(tip => {
+      const card = document.createElement('div');
+      card.className = 'tip-card';
+      card.innerHTML = `
+        <span class="tip-icon">${tip.icon}</span>
+        <div class="tip-text"><strong>${tip.title}</strong>${tip.text}</div>
+      `;
+      tipsContainer.appendChild(card);
+    });
+  }
+
+  // ══ SETUP ══
+  function saveSetup() {
+    const lastPeriod = document.getElementById('setup-last-period').value;
+    const cycleLength = parseInt(document.getElementById('setup-cycle-length').value);
+    const periodDuration = parseInt(document.getElementById('setup-period-duration').value);
+
+    if (!lastPeriod) {
+      alert('Please enter the date her last period started.');
+      return;
+    }
+
+    saveData({ lastPeriodStart: lastPeriod, cycleLength, periodDuration });
+    showApp();
+  }
+
+  // ══ SETTINGS ══
+  function openSettings() {
+    const data = loadData();
+    document.getElementById('edit-last-period').value = data.lastPeriodStart;
+    document.getElementById('edit-cycle-length').value = data.cycleLength;
+    document.getElementById('edit-period-duration').value = data.periodDuration;
+    document.getElementById('settings-panel').classList.add('open');
+  }
+
+  function closeSettings() {
+    document.getElementById('settings-panel').classList.remove('open');
+  }
+
+  function closeSettingsOutside(e) {
+    if (e.target === document.getElementById('settings-panel')) closeSettings();
+  }
+
+  function saveSettings() {
+    const data = loadData();
+    data.lastPeriodStart = document.getElementById('edit-last-period').value;
+    data.cycleLength = parseInt(document.getElementById('edit-cycle-length').value);
+    data.periodDuration = parseInt(document.getElementById('edit-period-duration').value);
+    saveData(data);
+    closeSettings();
+    renderApp();
+  }
+
+  // ══ LATE BANNER ══
+  const LATE_THRESHOLD_DAYS = 40;
+
+  function checkLateBanner(data) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const lastPeriod = new Date(data.lastPeriodStart);
+    lastPeriod.setHours(0, 0, 0, 0);
+    const daysSince = daysBetween(lastPeriod, today);
+    const banner = document.getElementById('late-banner');
+    if (daysSince > LATE_THRESHOLD_DAYS) {
+      const daysOver = daysSince - data.cycleLength;
+      document.getElementById('late-banner-msg').textContent =
+        `Her cycle is ${daysOver} day${daysOver !== 1 ? 's' : ''} longer than her usual ${data.cycleLength}-day cycle. This can be normal — stress, illness, travel, or hormonal shifts can all delay a period. If she hasn't mentioned it, a gentle check-in might be welcome.`;
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  // ══ LOOK AHEAD ══
+  function toggleLookAhead() {
+    const panel = document.getElementById('look-ahead-panel');
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      // Default to tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      document.getElementById('look-ahead-date').value = tomorrow.toISOString().split('T')[0];
+      computeLookAhead();
+    }
+  }
+
+  function computeLookAhead() {
+    const data = loadData();
+    const dateVal = document.getElementById('look-ahead-date').value;
+    if (!dateVal || !data) return;
+
+    const targetDate = new Date(dateVal);
+    targetDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (targetDate <= today) {
+      document.getElementById('la-phase-name').textContent = 'Pick a future date';
+      document.getElementById('la-phase-day').textContent = '';
+      document.getElementById('la-phase-desc').textContent = '';
+      document.getElementById('la-phase-tip').textContent = '';
+      document.getElementById('look-ahead-result').classList.add('visible');
+      return;
+    }
+
+    // Compute cycle state for target date (same logic, different reference point)
+    const lastPeriod = new Date(data.lastPeriodStart);
+    lastPeriod.setHours(0, 0, 0, 0);
+    const cycleLen = data.cycleLength;
+    const periodDur = data.periodDuration;
+    const ovulationDay = cycleLen - 14;
+
+    const daysSinceLast = daysBetween(lastPeriod, targetDate);
+    const cyclesElapsed = Math.floor(daysSinceLast / cycleLen);
+    const currentCycleStart = addDays(lastPeriod, cyclesElapsed * cycleLen);
+    const cycleDay = daysBetween(currentCycleStart, targetDate) + 1;
+
+    let phaseKey;
+    if (cycleDay <= periodDur) phaseKey = 'menstrual';
+    else if (cycleDay < ovulationDay - 1) phaseKey = 'follicular';
+    else if (cycleDay <= ovulationDay + 1) phaseKey = 'ovulation';
+    else phaseKey = 'luteal';
+
+    const phase = PHASES[phaseKey];
+    const tip = phase.tips[0]; // Show the first tip as a preview
+
+    document.getElementById('la-phase-name').textContent = phase.name;
+    document.getElementById('la-phase-day').textContent =
+      `Day ${cycleDay} of cycle · ${formatDateFull(targetDate)}`;
+    document.getElementById('la-phase-desc').textContent = phase.description;
+    document.getElementById('la-phase-tip').textContent = `💡 ${tip.title}: ${tip.text}`;
+    document.getElementById('look-ahead-result').classList.add('visible');
+  }
+
+  // ══ NAVIGATION ══
+  function showApp() {
+    document.getElementById('setup-screen').style.display = 'none';
+    document.getElementById('app-screen').style.display = 'block';
+    renderApp();
+  }
+
+  // ══ INIT ══
+  (function init() {
+    // Set default date to today for setup
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('setup-last-period').value = today;
+
+    const data = loadData();
+    if (data && data.lastPeriodStart) {
+      showApp();
+    }
+  })();
+</script>
+
+<!-- PWA Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    // Inline service worker for offline support
+    const swCode = `
+      const CACHE = 'cycle-companion-v1';
+      const FONT_URL = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap';
+
+      self.addEventListener('install', e => {
+        e.waitUntil(
+          caches.open(CACHE).then(cache =>
+            cache.addAll(['./'])
+          )
+        );
+        self.skipWaiting();
+      });
+
+      self.addEventListener('fetch', e => {
+        e.respondWith(
+          caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
+            const clone = res.clone();
+            caches.open(CACHE).then(cache => cache.put(e.request, clone));
+            return res;
+          }).catch(() => cached))
+        );
+      });
+    `;
+
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl).catch(() => {});
+  }
+</script>
+
+</body>
+</html>
