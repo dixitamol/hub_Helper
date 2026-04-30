@@ -68,6 +68,9 @@ The foundation. Everything needed to be useful from day one.
 - One-time setup: last period date, cycle length, period duration
 - Settings panel to update details at any time
 - PWA setup — installable to home screen, works offline
+
+
+V1.1
 - All data stored locally, nothing leaves the device
 - Inline SVG icon (no external image files needed)
 - Home screen and browser tab icon
