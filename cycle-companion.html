@@ -86,6 +86,18 @@
     .banner.export-remind .banner-body { color: #2a4a70; }
     .banner.export-remind .banner-body strong { color: #1a3050; }
     .banner.export-remind .banner-dismiss { color: #4a7ab5; }
+    .banner.notif { background: #fdf4ff; border: 1.5px solid #c8a0d8; }
+    .banner.notif .banner-body { color: #4a2060; }
+    .banner.notif .banner-body strong { color: #32144a; }
+    .banner.notif .banner-dismiss { color: #7a4a9e; }
+    .banner.notif.green { background: #f0f8ec; border-color: #a8d4a0; }
+    .banner.notif.green .banner-body { color: #2a5020; }
+    .banner.notif.green .banner-body strong { color: #1a3414; }
+    .banner.notif.green .banner-dismiss { color: #4a9455; }
+    .banner.notif.red { background: #fdf0f0; border-color: #e0a09a; }
+    .banner.notif.red .banner-body { color: #6a2020; }
+    .banner.notif.red .banner-body strong { color: #4a1414; }
+    .banner.notif.red .banner-dismiss { color: #c0514a; }
 
     /* Phase Hero */
     .phase-hero { margin: 4px 16px 0; border-radius: 24px; padding: 24px 24px 22px; background: white; box-shadow: 0 2px 24px rgba(44,36,22,0.07); position: relative; overflow: hidden; }
@@ -232,6 +244,55 @@
         <div class="banner-body">
           <strong>Cycle may be late</strong>
           <span id="banner-late-msg"></span>
+        </div>
+      </div>
+      <!-- v3 Notification banners -->
+      <div id="banner-period-ended" class="banner notif green">
+        <span class="banner-icon">🌱</span>
+        <div class="banner-body">
+          <strong>Her period has just ended</strong>
+          Energy is returning and her mood will lift quickly over the next few days. A great time to reconnect — suggest something you both enjoy.
+          <br/><button class="banner-dismiss" onclick="dismissNotif('period-ended')">Got it</button>
+        </div>
+      </div>
+      <div id="banner-ovulation-soon" class="banner notif green">
+        <span class="banner-icon">✨</span>
+        <div class="banner-body">
+          <strong>Ovulation in 1–2 days</strong>
+          She's approaching her peak — highest energy, best mood, most social. Plan something special or a date night.
+          <br/><button class="banner-dismiss" onclick="dismissNotif('ovulation-soon')">Got it</button>
+        </div>
+      </div>
+      <div id="banner-ovulation-today" class="banner notif green">
+        <span class="banner-icon">💫</span>
+        <div class="banner-body">
+          <strong>Ovulation day — her peak</strong>
+          Today is likely her highest energy and best mood day of the cycle. Be present, attentive, and make it count.
+          <br/><button class="banner-dismiss" onclick="dismissNotif('ovulation-today')">Got it</button>
+        </div>
+      </div>
+      <div id="banner-pms-soon" class="banner notif">
+        <span class="banner-icon">🧘</span>
+        <div class="banner-body">
+          <strong>PMS window starting soon</strong>
+          Energy will start dropping and emotions may become more sensitive over the next week. Time to switch into patient, supportive mode.
+          <br/><button class="banner-dismiss" onclick="dismissNotif('pms-soon')">Got it</button>
+        </div>
+      </div>
+      <div id="banner-period-soon" class="banner notif red">
+        <span class="banner-icon">🛒</span>
+        <div class="banner-body">
+          <strong>Period expected in 1–2 days</strong>
+          Check you have supplies at home (pads/tampons), comfort snacks, and a hot water bottle if she uses one. Small prep, big impact.
+          <br/><button class="banner-dismiss" onclick="dismissNotif('period-soon')">Got it</button>
+        </div>
+      </div>
+      <div id="banner-period-overdue" class="banner late">
+        <span class="banner-icon">🕐</span>
+        <div class="banner-body">
+          <strong>Period is a few days late</strong>
+          <span id="banner-overdue-msg"></span>
+          <br/><button class="banner-dismiss" onclick="dismissNotif('period-overdue')">Got it</button>
         </div>
       </div>
       <div id="banner-export" class="banner export-remind">
@@ -582,33 +643,68 @@
   // ═══════════════════════════════════
   function checkBanners(data, state) {
     const today = new Date(); today.setHours(0,0,0,0);
+    const d = data.dismissedNotifs || {};
 
-    // Late
-    const lateBanner = document.getElementById('banner-late');
+    function shouldShow(key) {
+      if (!d[key]) return true;
+      return daysBetween(new Date(d[key]), today) >= 1;
+    }
+
+    function show(id, condition) {
+      document.getElementById('banner-' + id).classList.toggle('visible', condition && shouldShow(id));
+    }
+
+    const np = state.daysToNext;
+    const ov = state.daysToOv;
     const daysSince = daysBetween(state.lastPeriod, today);
+
+    // Period just ended (days 1-2 of follicular)
+    show('period-ended', state.phase === 'follicular' && state.cycleDay <= data.periodDuration + 2);
+
+    // Ovulation in 1-2 days
+    show('ovulation-soon', ov === 1 || ov === 2);
+
+    // Ovulation today
+    show('ovulation-today', state.phase === 'ovulation' && state.cycleDay === Math.round(state.cycleLen - 14));
+
+    // PMS window starting (~7 days before period, early luteal)
+    show('pms-soon', state.phase === 'luteal' && np <= 7 && np >= 6);
+
+    // Period in 1-2 days
+    show('period-soon', np === 1 || np === 2);
+
+    // Period overdue (late but under LATE_THRESHOLD — gentle heads up)
+    const overdueDays = daysSince - state.cycleLen;
+    const isOverdue = overdueDays >= 3 && daysSince <= LATE_THRESHOLD;
+    if (isOverdue) {
+      document.getElementById('banner-overdue-msg').textContent =
+        `Her period is ${overdueDays} day${overdueDays !== 1 ? 's' : ''} later than usual. This is often nothing — stress, diet, or a busy week can delay things. Just be extra gentle and patient.`;
+    }
+    show('period-overdue', isOverdue);
+
+    // Late cycle (existing — 40+ days)
+    document.getElementById('banner-late').classList.toggle('visible',
+      daysSince > LATE_THRESHOLD && shouldShow('late'));
     if (daysSince > LATE_THRESHOLD) {
       const over = daysSince - state.cycleLen;
       document.getElementById('banner-late-msg').textContent =
         `Her cycle is ${over} day${over !== 1 ? 's' : ''} longer than her usual ${state.cycleLen}-day cycle. Stress, illness, or travel can all delay a period — but a gentle check-in might be welcome.`;
-      lateBanner.classList.add('visible');
-    } else {
-      lateBanner.classList.remove('visible');
     }
 
     // Export reminder
-    const exportBanner = document.getElementById('banner-export');
     const cycles = (data.cycleHistory || []).length;
-    if (cycles >= EXPORT_REMINDER_MIN_CYCLES) {
-      const ref = data.exportBannerDismissedAt || data.lastExportDate;
-      const daysSinceRef = ref ? daysBetween(new Date(ref), today) : Infinity;
-      if (daysSinceRef >= EXPORT_REMINDER_DAYS) {
-        exportBanner.classList.add('visible');
-      } else {
-        exportBanner.classList.remove('visible');
-      }
-    } else {
-      exportBanner.classList.remove('visible');
-    }
+    const ref = data.exportBannerDismissedAt || data.lastExportDate;
+    const daysSinceExport = ref ? daysBetween(new Date(ref), today) : Infinity;
+    document.getElementById('banner-export').classList.toggle('visible',
+      cycles >= EXPORT_REMINDER_MIN_CYCLES && daysSinceExport >= EXPORT_REMINDER_DAYS);
+  }
+
+  function dismissNotif(key) {
+    const data = loadData();
+    if (!data.dismissedNotifs) data.dismissedNotifs = {};
+    data.dismissedNotifs[key] = todayStr();
+    saveData(data);
+    document.getElementById('banner-' + key).classList.remove('visible');
   }
 
   function dismissExportBanner() {
