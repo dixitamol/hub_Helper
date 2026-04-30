@@ -134,6 +134,34 @@
     .tip-text { font-size: 0.875rem; line-height: 1.6; color: var(--text-mid); }
     .tip-text strong { display: block; font-weight: 500; color: var(--text-dark); margin-bottom: 2px; font-size: 0.85rem; }
 
+    /* Symptom Log */
+    .symptom-sheet { display:none; position:fixed; inset:0; background:rgba(44,36,22,0.4); z-index:200; align-items:flex-end; justify-content:center; }
+    .symptom-sheet.open { display:flex; }
+    .symptom-inner { background:var(--warm-white); border-radius:24px 24px 0 0; padding:28px 24px 48px; width:100%; max-width:420px; animation:slideUp 0.3s ease; }
+    .symptom-inner h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; margin-bottom:6px; }
+    .symptom-inner .s-sub { font-size:0.8rem; color:var(--text-light); margin-bottom:20px; }
+    .symptom-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px; }
+    .symptom-toggle { padding:12px 10px; border:1.5px solid #e8ddd0; border-radius:var(--radius-sm); background:white; font-family:'DM Sans',sans-serif; font-size:0.82rem; color:var(--text-mid); cursor:pointer; text-align:center; transition:all 0.15s; }
+    .symptom-toggle.active { border-color:var(--phase-accent); background:var(--phase-bg); color:var(--phase-accent); font-weight:500; }
+    .symptom-actions { display:flex; gap:8px; }
+
+    /* Relationship prompt */
+    .prompt-card { margin:14px 16px 0; background:white; border-radius:var(--radius-sm); padding:16px 18px; box-shadow:0 2px 16px rgba(44,36,22,0.05); display:flex; gap:14px; align-items:flex-start; }
+    .prompt-card .p-icon { font-size:1.2rem; flex-shrink:0; line-height:1.4; }
+    .prompt-card .p-body { flex:1; }
+    .prompt-card .p-label { font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-light); margin-bottom:4px; }
+    .prompt-card .p-text { font-size:0.875rem; line-height:1.6; color:var(--text-mid); }
+    .prompt-card .p-refresh { background:none; border:none; cursor:pointer; font-size:0.75rem; color:var(--text-light); text-decoration:underline; margin-top:6px; padding:0; font-family:'DM Sans',sans-serif; }
+
+    /* Patterns drawer section */
+    .pattern-item { font-size:0.85rem; color:var(--text-mid); line-height:1.7; padding:6px 0; border-bottom:1px solid #f0e8dc; }
+    .pattern-item:last-child { border-bottom:none; }
+    .pattern-locked { font-size:0.82rem; color:var(--text-light); font-style:italic; }
+
+    /* Log today button */
+    .log-today-btn { width:100%; background:white; border:1.5px dashed #d8ccc0; border-radius:var(--radius-sm); padding:13px 18px; display:flex; align-items:center; gap:10px; cursor:pointer; font-family:'DM Sans',sans-serif; margin:10px 16px 0; width:calc(100% - 32px); transition:border-color 0.2s; }
+    .log-today-btn span { font-size:0.875rem; color:var(--text-mid); }
+
     /* Look Ahead */
     .look-ahead-section { margin: 14px 16px 0; }
     .look-ahead-trigger { width: 100%; background: white; border: 1.5px dashed #d8ccc0; border-radius: var(--radius-sm); padding: 16px 18px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: border-color 0.2s; font-family: 'DM Sans', sans-serif; }
@@ -351,6 +379,21 @@
       <div id="tips-container"></div>
     </div>
 
+    <!-- Log today button -->
+    <button class="log-today-btn fade-in fade-in-d3" onclick="openSymptomSheet()">
+      <span>📝</span><span>Log how she seems today</span>
+    </button>
+
+    <!-- Relationship prompt -->
+    <div class="prompt-card fade-in fade-in-d3" id="prompt-card">
+      <span class="p-icon" id="prompt-icon">💡</span>
+      <div class="p-body">
+        <div class="p-label">Gesture for today</div>
+        <div class="p-text" id="prompt-text">—</div>
+        <button class="p-refresh" onclick="refreshPrompt()">Different suggestion</button>
+      </div>
+    </div>
+
     <!-- Look Ahead -->
     <div class="look-ahead-section fade-in fade-in-d4">
       <div class="section-label">Plan ahead</div>
@@ -372,6 +415,28 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- SYMPTOM SHEET -->
+<div class="symptom-sheet" id="symptom-sheet" onclick="closeSymptomSheetOutside(event)">
+  <div class="symptom-inner">
+    <h3>Today's observations</h3>
+    <p class="s-sub" id="symptom-date-label">—</p>
+    <div class="symptom-grid">
+      <button class="symptom-toggle" data-key="cramps" onclick="toggleSymptom(this)">😣 Cramps</button>
+      <button class="symptom-toggle" data-key="lowEnergy" onclick="toggleSymptom(this)">😴 Low energy</button>
+      <button class="symptom-toggle" data-key="moodSwings" onclick="toggleSymptom(this)">🌊 Mood swings</button>
+      <button class="symptom-toggle" data-key="bloating" onclick="toggleSymptom(this)">🫧 Bloating</button>
+      <button class="symptom-toggle" data-key="cravings" onclick="toggleSymptom(this)">🍫 Cravings</button>
+      <button class="symptom-toggle" data-key="highEnergy" onclick="toggleSymptom(this)">⚡ High energy</button>
+      <button class="symptom-toggle" data-key="irritable" onclick="toggleSymptom(this)">😤 Irritable</button>
+      <button class="symptom-toggle" data-key="happy" onclick="toggleSymptom(this)">😊 Happy mood</button>
+    </div>
+    <div class="symptom-actions">
+      <button class="btn-primary small" onclick="saveSymptoms()">Save</button>
+      <button class="btn-secondary" onclick="closeSymptomSheet()">Cancel</button>
+    </div>
   </div>
 </div>
 
@@ -425,6 +490,12 @@
       <p class="hint">Used until you have 2+ cycles logged.</p>
     </div>
     <button class="btn-primary small" onclick="saveSettings()">Save settings</button>
+  </div>
+
+  <!-- Patterns -->
+  <div class="drawer-section" id="patterns-section" style="display:none;">
+    <div class="drawer-section-title">Her patterns</div>
+    <div id="patterns-list"></div>
   </div>
 
   <!-- Backup -->
@@ -636,6 +707,8 @@
     });
 
     checkBanners(data, state);
+    currentPromptIdx = -1;
+    renderPrompt(state.phase);
   }
 
   // ═══════════════════════════════════
@@ -714,6 +787,99 @@
     document.getElementById('banner-export').classList.remove('visible');
   }
 
+
+  // ═══════════════════════════════════
+  // RELATIONSHIP PROMPTS
+  // ═══════════════════════════════════
+  const PROMPTS = {
+    menstrual: ["Make her a hot drink without being asked","Put the hot water bottle on before she has to ask","Order or cook her favourite comfort meal tonight","Let her choose what you watch — no complaints","Give her a gentle back or shoulder rub","Keep the environment calm and quiet this evening","Check if she needs anything from the pharmacy"],
+    follicular: ["Suggest a new restaurant you've been wanting to try","Plan a weekend trip or day out together","Bring her flowers or a small treat for no reason","Ask about something she's been excited about lately","Suggest an activity you can do together this week","Leave a sweet note somewhere she'll find it"],
+    ovulation: ["Book a date night — dinner, a show, anything special","Tell her specifically what you love about her today","Suggest doing something spontaneous this evening","Make an effort with how you present yourself tonight","Plan something she's been hinting at","Send her a thoughtful message mid-day"],
+    luteal: ["Run her a bath with no prompting","Handle dinner entirely on your own tonight","If she seems overwhelmed, quietly take something off her plate","Don't bring up anything stressful unless urgent","Make sure her favourite snacks are in the house","Check in with 'how are you feeling?' and actually listen","Give her space if she needs it — don't take it personally"]
+  };
+
+  let currentPromptIdx = -1;
+
+  function renderPrompt(phaseKey) {
+    const prompts = PROMPTS[phaseKey];
+    if (currentPromptIdx < 0) currentPromptIdx = Math.floor(Math.random() * prompts.length);
+    document.getElementById('prompt-icon').textContent = phaseKey === 'menstrual' ? '🤍' : phaseKey === 'follicular' ? '🌿' : phaseKey === 'ovulation' ? '✨' : '🧘';
+    document.getElementById('prompt-text').textContent = prompts[currentPromptIdx];
+  }
+
+  function refreshPrompt() {
+    const data = loadData();
+    const state = computeCycleState(data);
+    const prompts = PROMPTS[state.phase];
+    currentPromptIdx = (currentPromptIdx + 1) % prompts.length;
+    document.getElementById('prompt-text').textContent = prompts[currentPromptIdx];
+  }
+
+  // ═══════════════════════════════════
+  // SYMPTOM LOG
+  // ═══════════════════════════════════
+  function openSymptomSheet() {
+    const today = todayStr();
+    document.getElementById('symptom-date-label').textContent = fmtDateShort(today);
+    const data = loadData();
+    const existing = (data.symptoms || {})[today] || {};
+    document.querySelectorAll('.symptom-toggle').forEach(btn => {
+      btn.classList.toggle('active', !!existing[btn.dataset.key]);
+    });
+    document.getElementById('symptom-sheet').classList.add('open');
+  }
+
+  function closeSymptomSheet() { document.getElementById('symptom-sheet').classList.remove('open'); }
+  function closeSymptomSheetOutside(e) { if (e.target.id === 'symptom-sheet') closeSymptomSheet(); }
+
+  function toggleSymptom(btn) { btn.classList.toggle('active'); }
+
+  function saveSymptoms() {
+    const data = loadData();
+    if (!data.symptoms) data.symptoms = {};
+    const today = todayStr();
+    const entry = {};
+    document.querySelectorAll('.symptom-toggle').forEach(btn => {
+      if (btn.classList.contains('active')) entry[btn.dataset.key] = true;
+    });
+    data.symptoms[today] = entry;
+    saveData(data);
+    closeSymptomSheet();
+  }
+
+  // ═══════════════════════════════════
+  // PATTERN INSIGHTS
+  // ═══════════════════════════════════
+  const SYMPTOM_LABELS = { cramps:'Cramps', lowEnergy:'Low energy', moodSwings:'Mood swings', bloating:'Bloating', cravings:'Cravings', highEnergy:'High energy', irritable:'Irritability', happy:'Happy mood' };
+
+  function renderPatterns(data) {
+    const section = document.getElementById('patterns-section');
+    const symptoms = data.symptoms || {};
+    const days = Object.keys(symptoms);
+    if (days.length < 90) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+
+    // Count each symptom, find which cycle days it appears on most
+    const counts = {};
+    days.forEach(d => {
+      Object.keys(symptoms[d]).forEach(k => { counts[k] = (counts[k] || 0) + 1; });
+    });
+
+    const total = days.length;
+    const insights = [];
+    Object.entries(counts).forEach(([k, n]) => {
+      const pct = Math.round(n / total * 100);
+      if (pct >= 30) insights.push(`${SYMPTOM_LABELS[k]} noted on ~${pct}% of logged days`);
+    });
+
+    const el = document.getElementById('patterns-list');
+    if (!insights.length) {
+      el.innerHTML = '<p class="pattern-locked">Not enough variation in logs yet to identify patterns.</p>';
+    } else {
+      el.innerHTML = insights.map(i => `<div class="pattern-item">${i}</div>`).join('');
+    }
+  }
+
   // ═══════════════════════════════════
   // DRAWER
   // ═══════════════════════════════════
@@ -754,6 +920,7 @@
     }
 
     renderHistoryList(data);
+    renderPatterns(data);
   }
 
   function renderHistoryList(data) {
